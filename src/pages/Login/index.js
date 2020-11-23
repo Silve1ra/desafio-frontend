@@ -15,7 +15,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      fetch('http://localhost:3001/api/user/login', {
+      fetch('http://localhost:5000/api/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

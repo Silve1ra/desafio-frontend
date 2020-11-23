@@ -9,15 +9,15 @@ import './styles.css';
 
 export default function Course(){
   const loggedUser = localStorage.getItem('authorizedEmail');
-  const [cursos, setCursos] = useState([]);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    api.get('curso').then(res => setCursos(res.data.cursos));
+    api.get('courses').then(res => setCourses(res.data));
   }, [loggedUser]);
 
   async function handleDeleteCourse(id) {
     try {
-      await api.delete(`curso/${id}`)
+      await api.delete(`courses/${id}`)
     }catch(err){
       alert(err);
     }
@@ -29,13 +29,13 @@ export default function Course(){
       <main className="course-container">
         <h1>Bem Vindo, {loggedUser.split('@')[0]}</h1>
         <ul>
-        {cursos ? cursos.map(curso =>  (
-          <li key={curso.id}>
-            <p>{curso.nome}</p>
+        {courses ? courses.map(course =>  (
+          <li key={course.course_title}>
+            <p>{course.course_title}</p>
             <p>Prof alvares de azevedo</p>
             <p>sala 502</p>
-            <p>{curso.inicio} as {curso.fim}</p>
-            <button type="button" onClick={() => handleDeleteCourse(curso.id)}>
+            <p>{course.time_start} as {course.time_end}</p>
+            <button type="button" onClick={() => handleDeleteCourse(course.id)}>
               <FiX size={20}/>
             </button>
           </li>

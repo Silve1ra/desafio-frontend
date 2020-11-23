@@ -20,15 +20,18 @@ export default function NewCourse() {
     e.preventDefault();
 
     const data = {
-      nomeCurso,
-      professores,
-      salas,
-      inicio,
-      fim
+      tablename: "courses",
+      data: {
+        course_title: nomeCurso,
+        time_start: inicio,
+        time_end: fim
+      }
     };
 
     try {
-      const response = await api.post('curso', data);
+      console.log(data)
+
+      const response = await api.post('add', data);
       alert(`Curso salvo com sucesso! Status: ${response.data.status}`);
       history.push('/course');
     }catch(err){
